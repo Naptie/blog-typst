@@ -11,7 +11,7 @@ const { URL_BASE } = loadEnv(process.env.NODE_ENV ?? "", process.cwd(), "");
 export default defineConfig({
   // Deploys to GitHub Pages
   site: "https://naptie.github.io",
-  base: URL_BASE ?? DEFAULT_URL_BASE,
+  base: process.env.URL_BASE ?? URL_BASE ?? DEFAULT_URL_BASE,
 
   integrations: [
     sitemap(),
