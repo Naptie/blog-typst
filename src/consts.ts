@@ -4,9 +4,11 @@
 import * as config from "../config.json";
 import CLICKS from "../content/snapshot/article-clicks.json";
 import COMMENTS from "../content/snapshot/article-comments.json";
+import { loadEnv } from "vite";
 
 type Comment = (typeof COMMENTS)[number];
 
+const { URL_BASE } = loadEnv(process.env.NODE_ENV ?? "", process.cwd(), "");
 /**
  * Whether to enable backend, required by click and comment feature.
  */
@@ -41,7 +43,11 @@ export const kSiteDescription = config.SITE_DESCRIPTION;
  * - For a GitHub page `https://username.github.io/repo`, the URL base is `/repo/`.
  * - For a netlify page, the URL base is `/`.
  */
-export const kUrlBase = config.URL_BASE.replace(/\/$/, "");
+export const kUrlBase = (
+  process.env.URLBASE ??
+  URL_BASE ??
+  config.URL_BASE
+).replace(/\/$/, "");
 
 /**
  * The click info obtained from the backend.
