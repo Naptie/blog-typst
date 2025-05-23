@@ -8,7 +8,7 @@ import { URL_BASE } from "./config.json";
 export default defineConfig({
   // Deploys to GitHub Pages
   site: "https://naptie.github.io",
-  base: URL_BASE,
+  base: process.env.URL_BASE ?? URL_BASE,
 
   integrations: [
     sitemap(),
