@@ -2,7 +2,7 @@
 #import "/typ/templates/mod.typ": sys-is-html-target
 
 #let self-desc = [
-  This is part of the PhiZone blog site specifically for articles written in Typst.
+  This section of the PhiZone blog is dedicated to articles written in Typst.
 
   #link("https://github.com/PhiZone")[GitHub]/#link("https://www.phi.zone")[PhiZone]. Donate via #link("https://patreon.com/naptie")[Patreon]/#link("https://afdian.com/a/naptie")[爱发电].
 ]
