@@ -51,6 +51,7 @@
   music-theory: "Music Theory",
   tinymist: "Tinymist",
   typst: "Typst",
+  rhythm-games: "Rhythm Games",
   misc: "Miscellaneous",
 )
 

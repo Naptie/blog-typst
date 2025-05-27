@@ -4,13 +4,16 @@
 import * as config from "../config.json";
 import STATS from "../content/snapshot/article-stats.json";
 import COMMENTS from "../content/snapshot/article-comments.json";
+import { loadEnv } from "vite";
+
+const { URL_BASE } = loadEnv(process.env.NODE_ENV ?? "", process.cwd(), "");
 
 type Comment = (typeof COMMENTS)[number];
 
 /**
  * Whether to enable backend, required by click and comment feature.
  */
-export const kEnableBackend = true;
+export const kEnableBackend = false;
 /**
  * Whether to enable click tracking.
  */
@@ -44,7 +47,7 @@ export const kSiteTitle = config.SITE_TITLE;
 /**
  * The title of the website.
  */
-export const kSiteLogo = "PoeMagie";
+export const kSiteLogo = "PhiZone";
 /**
  * The title of the website, used in the index page.
  */
@@ -63,7 +66,7 @@ export const kBaiduVeriCode = config.BAIDU_VERIFICATION_CODE;
  * - For a GitHub page `https://username.github.io/repo`, the URL base is `/repo/`.
  * - For a netlify page, the URL base is `/`.
  */
-export const kUrlBase = config.URL_BASE.replace(/\/$/, "");
+export const kUrlBase = (URL_BASE ?? config.URL_BASE).replace(/\/$/, "");
 
 /**
  * The click info obtained from the backend.
@@ -90,14 +93,9 @@ export const kCommentList = COMMENTS;
  */
 export const kFriendLinks = [
   {
-    name: "7mile",
-    url: "https://7li.moe/",
-    desc: "一切都有其意义，包括停滞不前的日子。",
-  },
-  {
-    name: "Margatroid",
-    url: "https://blog.mgt.moe/",
-    desc: "SIGSLEEP Fellow",
+    name: "Naptie",
+    url: "https://github.com/Naptie",
+    desc: "Nap & tea.",
   },
 ];
 /**

@@ -6,13 +6,13 @@ import Header from "$components/Header.astro";
 import Footer from "$components/Footer.astro";
 import FormattedDate from "$components/FormattedDate.astro";
 import TagList from "$components/TagList.astro";
-import { renderComment } from "$components/Typst";
+// import { renderComment } from "$components/Typst";
 
 import {
   kSiteTitle,
   kSiteIndexTitle,
   kSiteDescription,
-  kCommentList,
+  // kCommentList,
   kUrlBase,
   kBaiduVeriCode,
 } from "$consts";
@@ -24,15 +24,15 @@ import "$styles/IndexPostList.css";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
-const comments = kCommentList.sort(
-  (a, b) => b.createdAt.valueOf() - a.createdAt.valueOf()
-);
+// const comments = kCommentList.sort(
+//   (a, b) => b.createdAt.valueOf() - a.createdAt.valueOf()
+// );
 const pdfArchives = (await getCollection("archive")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
 const recent5Posts = posts.slice(0, 5);
-const recent5Comments = comments.slice(0, 5);
+// const recent5Comments = comments.slice(0, 5);
 
 function extractArchive(archive: (typeof pdfArchives)[0]) {
   return [archive.id, archive.data.title];
@@ -92,7 +92,7 @@ function extractArchive(archive: (typeof pdfArchives)[0]) {
           }
         </ul>
       </section>
-      <section aria-label="Recent Comments">
+      <!-- <section aria-label="Recent Comments">
         <h2>Recent Comments</h2>
         <ul class="block-list comments">
           {
@@ -119,7 +119,7 @@ function extractArchive(archive: (typeof pdfArchives)[0]) {
             ))
           }
         </ul>
-      </section>
+      </section> -->
       <section aria-label="Archive">
         <h2>Archived PDFs</h2>
         <ul class="accent block-list monthly">

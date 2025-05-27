@@ -1,10 +1,8 @@
 {
-  "SITE_TITLE": "PoeMagie",
-  "SITE_INDEX_TITLE": "<em>PoeMagie</em>",
-  "SITE_DESCRIPTION": "Welcome to my blog!",
-  "URL_BASE": "",
-  "BACKEND_ADDR": [
-    "https://glittery-valkyrie-8fbf14.netlify.app/api"
-  ],
-  "BAIDU_VERIFICATION_CODE": "codeva-FnEGCWzDkT"
+  "SITE_TITLE": "PhiZone",
+  "SITE_INDEX_TITLE": "<em>PhiZone</em>",
+  "SITE_DESCRIPTION": "Blogs of PhiZone written in Typst.",
+  "URL_BASE": "/blog-typst",
+  "BACKEND_ADDR": [],
+  "BAIDU_VERIFICATION_CODE": "TODO"
 }

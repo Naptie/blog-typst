@@ -82,10 +82,10 @@
   show math.equation: set text(weight: 400)
   show math.equation.where(block: true): it => context if shiroa-sys-target() == "html" {
     theme-frame(
-      tag: "p",
+      tag: "span",
       theme => {
         set text(fill: theme.main-color)
-        p-frame(attrs: ("class": "block-equation"), it)
+        span-frame(attrs: ("class": "block-equation"), it)
       },
     )
   } else {
@@ -182,7 +182,7 @@
   show: it => if is-same-kind {
     // set basic document metadata
     set document(
-      author: ("Myriad-Dreamin",),
+      author: ("Phizo",),
       title: title,
     )
 
@@ -270,7 +270,7 @@
   if kind == "monthly" or is-same-kind [
     #metadata((
       title: plain-text(title),
-      author: "Myriad-Dreamin",
+      author: "Phizo",
       description: plain-text(desc),
       date: date,
       tags: tags,

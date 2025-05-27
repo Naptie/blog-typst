@@ -2,17 +2,15 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { typst } from "astro-typst";
-import { URL_BASE } from "./config.json";
+import { URL_BASE as DEFAULT_URL_BASE } from "./config.json";
+import { loadEnv } from "vite";
 
+const { URL_BASE } = loadEnv(process.env.NODE_ENV ?? "", process.cwd(), "");
 // https://astro.build/config
 export default defineConfig({
   // Deploys to GitHub Pages
-  // site: "https://myriad-dreamin.github.io",
-  // base: "/blog/",
-
-  // Deploys to My Blog Site
-  site: "https://www.myriad-dreamin.com",
-  base: URL_BASE,
+  site: "https://naptie.github.io",
+  base: URL_BASE ?? DEFAULT_URL_BASE,
 
   integrations: [
     sitemap(),
