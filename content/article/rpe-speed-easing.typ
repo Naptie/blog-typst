@@ -1,5 +1,5 @@
-#import "@preview/physica:0.9.2": *
 #import "/typ/templates/blog.typ": *
+#import "@preview/physica:0.9.2": *
 
 #show: main.with(
   title: "RPE 速度事件缓动的研究与适配",

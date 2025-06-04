@@ -67,7 +67,7 @@ export const kBaiduVeriCode: string | undefined =
  * - For a GitHub page `https://username.github.io/repo`, the URL base is `/repo/`.
  * - For a netlify page, the URL base is `/`.
  */
-export const kUrlBase = (config.URL_BASE || "").replace(/\/$/, "");
+export const kUrlBase = (URL_BASE || "").replace(/\/$/, "");
 
 /**
  * The click info obtained from the backend.
