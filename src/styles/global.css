@@ -28,9 +28,9 @@
 }
 
 body {
-  --vp-font-family-base: "Inter Variable", "Noto Sans SC", "PingFang SC",
-    "Microsoft Yahei", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --vp-font-family-base: "Inter Variable", "Inter", "Noto Sans SC",
+    "PingFang SC", "Microsoft Yahei", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --vp-font-family-mono: ui-monospace, "Menlo", "Monaco", "Consolas",
     "Liberation Mono", "Courier New", monospace;
 
@@ -222,16 +222,16 @@ nav a:hover,
   cursor: pointer;
 }
 .dark .theme-icon.light {
-  display: block;
+  display: none;
 }
 .dark .theme-icon.dark {
-  display: none;
+  display: dark;
 }
 .theme-icon.light {
-  display: none;
+  display: dark;
 }
 .theme-icon.dark {
-  display: block;
+  display: none;
 }
 .dark .code-image.themed .light {
   display: none;

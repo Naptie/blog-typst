@@ -1,6 +1,9 @@
 # Blog
 
-The starter template for static blogs, powered by [typst](https://github.com/typst/typst) and [Astro](https://astro.build/).
+My personal blog, powered by [typst](https://github.com/typst/typst) and [Astro](https://astro.build/).
+
+> [!NOTE]
+> wanna use it to write your blog posts? Please check [blog-template](https://github.com/Myriad-Dreamin/blog-template) instead of forking my personal blog, which contains my personal blog posts and configurations.
 
 ## Features
 
@@ -15,6 +18,12 @@ Typst-specific features:
 
 - Heading Permalinks and Table of Contents.
 - PDF Archives.
+
+## Creating a Blog from Template
+
+```bash
+pnpm create @myriaddreamin/tylant@latest
+```
 
 ## Commands
 
@@ -35,13 +44,13 @@ All commands are run from the root of the project, from a terminal:
 
 Open using the default setting:
 
-```
+```bash
 code .vscode/blog.code-workspace
 ```
 
 Or customize it:
 
-```
+```bash
 cp .vscode/blog.code-workspace .vscode/blog.private.code-workspace
 code .vscode/blog.private.code-workspace
 ```
@@ -77,27 +86,51 @@ There is a sample blog post in [`content/article/personal-info.typ`](https://git
 
 ## Deploying to GitHub Pages
 
-1. Search and change the [URL_BASE](./config.json) to name of your own repository.
+1. Set the URL_BASE in [.env](./.env). If you would like to keep it in secret, please set it in either `.env.{production,development}` file in root or [Environments](../../settings/environments).
    - For a GitHub page `https://username.github.io/repo`, the URL base is `/repo/`.
-2. Change Source's "Build and deployment" to "GitHub Actions" in [Page Settings](../../settings/pages).
-3. Push your changes to the `main` branch and it will automatically deploy to GitHub Pages by [CI](.github/workflows/gh-pages.yml).
+1. Change Source's "Build and deployment" to "GitHub Actions" in [Page Settings](../../settings/pages).
+1. Push your changes to the `main` branch and it will automatically deploy to GitHub Pages by [CI](.github/workflows/gh-pages.yml).
 
 ## Customization
 
-- [`config.json`](config.json): Configuration read by files.
+- `.env`: Configuration read by files, Please check `defineConfig/env` in [astro.config.mjs](astro.config.mjs) for schema.
 - [`src/consts.ts`](./src/consts.ts),[`src/components/BaseHead.astro`](./src/components/BaseHead.astro): global metadata, font resource declarations, and the head component.
 - [`src/styles/*`](src/styles/): CSS styles.
 
 ## Todo
 
-- [ ] More friendly content submodule for forks
+Improve experience:
+
+- [ ] More friendly submodule for forks
+- [ ] Split Backend Components to a separate repository
+
+Improve website:
+
 - [ ] Intro-site Link Hover Preview
+- [ ] [Last Modified Time](https://5-0-0-beta.docs.astro.build/en/recipes/modified-time/)
 - [ ] Styling
   - [ ] Table
-  - [ ] Inline Raw
+  - [x] Inline Raw
   - [ ] Blocky Raw
 - [ ] Index Page Design
   - [ ] Badge
+- [ ] Comment Reply
+- [ ] Better [`theme-frame`](typ/templates/theme.typ)
+- [ ] Refactor code to publish packages
+  - [ ] `@myriad-dreamin/blog-template` for creating blogs
+  - Some components that could be removed (JS required):
+    - [ ] `@myriaddreamin/tylant-search`
+    - [x] `@myriaddreamin/tylant-theme-toggle`
+  - Typst Kit
+    - [ ] `@myriaddreamin/tylant-typst-kit`
+      - focus on concept: `post` collections
+    - [x] `@myriaddreamin/tylant-pdf-archive`
+      - focus on concept: `pdf` collections
+  - People who don't like backend could remove them:
+    - [ ] `@myriaddreamin/tylant-backend-client`
+    - [ ] `@myriaddreamin/tylant-click`
+    - [x] `@myriaddreamin/tylant-like-reaction`
+    - [x] `@myriaddreamin/tylant-comment`
 
 ## Credit
 
