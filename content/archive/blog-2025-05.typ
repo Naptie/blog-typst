@@ -8,9 +8,6 @@
     archive-tags.blog-post,
   ),
   archive-indices: (
-    "rpe-speed-easing",
+    articles.rpe-speed-easing,
   ),
 )
-
-#include "/content/article/rpe-speed-easing.typ"
-// #pagebreak(weak: true)

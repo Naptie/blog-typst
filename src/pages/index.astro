@@ -1,42 +1,37 @@
 ---
 import { getCollection } from "astro:content";
 
+import { RecentComment } from "@myriaddreamin/tylant-comment";
+import { ArchiveList } from "@myriaddreamin/tylant-pdf-archive";
+import { TagList } from "@myriaddreamin/tylant";
+import { renderComment } from "@myriaddreamin/tylant";
+
 import BaseHead from "$components/BaseHead.astro";
 import Header from "$components/Header.astro";
 import Footer from "$components/Footer.astro";
 import FormattedDate from "$components/FormattedDate.astro";
-import TagList from "$components/TagList.astro";
-// import { renderComment } from "$components/Typst";
 
 import {
   kSiteTitle,
   kSiteIndexTitle,
   kSiteDescription,
-  // kCommentList,
+  kCommentList,
   kUrlBase,
   kBaiduVeriCode,
+  kEnableComment,
+  kEnableArchive,
 } from "$consts";
 // @ts-ignore
 import AboutContent from "../../content/other/about.typ?html&body";
 
 import "$styles/IndexPostList.css";
 
+const pdfArchives = await getCollection("archive");
 const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
-// const comments = kCommentList.sort(
-//   (a, b) => b.createdAt.valueOf() - a.createdAt.valueOf()
-// );
-const pdfArchives = (await getCollection("archive")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
 const recent5Posts = posts.slice(0, 5);
-// const recent5Comments = comments.slice(0, 5);
-
-function extractArchive(archive: (typeof pdfArchives)[0]) {
-  return [archive.id, archive.data.title];
-}
 ---
 
 <!doctype html>
@@ -44,7 +39,11 @@ function extractArchive(archive: (typeof pdfArchives)[0]) {
   <head>
     <BaseHead title={kSiteTitle} description={kSiteDescription} />
     <!-- Baidu -->
-    <meta name="baidu-site-verification" content={kBaiduVeriCode} />
+    {
+      kBaiduVeriCode && (
+        <meta name="baidu-site-verification" content={kBaiduVeriCode} />
+      )
+    }
 
     <style>
       .comments a {
@@ -92,46 +91,24 @@ function extractArchive(archive: (typeof pdfArchives)[0]) {
           }
         </ul>
       </section>
-      <!-- <section aria-label="Recent Comments">
-        <h2>Recent Comments</h2>
-        <ul class="block-list comments">
-          {
-            recent5Comments.map((comment) => (
-              <li class="comment-item">
-                <div class="comment-head">
-                  <strong class="name">{comment.email}</strong> on
-                  <a
-                    class="heading"
-                    href={`${kUrlBase}/article/${comment.articleId}`}
-                  >
-                    {
-                      posts.find((post) => post.id === comment.articleId)?.data
-                        .title
-                    }
-                  </a>
-                  <em>
-                    at
-                    <time>{new Date(comment.createdAt).toLocaleString()}</time>
-                  </em>
-                </div>
-                <span class="title" set:html={renderComment(comment.content)} />
-              </li>
-            ))
-          }
-        </ul>
-      </section> -->
-      <section aria-label="Archive">
-        <h2>Archived PDFs</h2>
-        <ul class="accent block-list monthly">
-          {
-            pdfArchives.map(extractArchive).map(([id, title]) => (
-              <li>
-                <a href={`${kUrlBase}/archive/${id}.pdf`}>{title}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
+      {
+        kEnableComment && (
+          <RecentComment
+            kCommentList={kCommentList}
+            renderComment={renderComment}
+          >
+            <fragment slot="articleRef">
+              {(id: string) => (
+                <a class="heading" href={`${kUrlBase}/article/${id}`}>
+                  {posts.find((post) => post.id === id)?.data.title || ""}
+                </a>
+              )}
+            </fragment>
+          </RecentComment>
+        )
+      }
+
+      {kEnableArchive && <ArchiveList pdfArchives={pdfArchives} />}
     </main>
     <Footer />
   </body>

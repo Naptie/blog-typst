@@ -1,16 +1,42 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { typst } from "astro-typst";
-import { URL_BASE as DEFAULT_URL_BASE } from "./config.json";
 import { loadEnv } from "vite";
 
-const { URL_BASE } = loadEnv(process.env.NODE_ENV ?? "", process.cwd(), "");
-// https://astro.build/config
+// Please check `defineConfig/env` in astro.config.mjs for schema
+const e = loadEnv(process.env.NODE_ENV || "", process.cwd(), "");
+const { SITE, URL_BASE } = e;
+
+const EnvStr = (optional = true) =>
+  envField.string({ context: "client", access: "public", optional });
+const MustEnvStr = (optional = false) => EnvStr(optional);
+
 export default defineConfig({
-  // Deploys to GitHub Pages
-  site: "https://naptie.github.io",
-  base: URL_BASE ?? DEFAULT_URL_BASE,
+  // Whether to prefetch links while hovering.
+  // See: https://docs.astro.build/en/guides/prefetch/
+  prefetch: {
+    prefetchAll: true,
+  },
+
+  site: SITE,
+  base: URL_BASE,
+
+  env: {
+    schema: {
+      SITE: MustEnvStr(),
+      URL_BASE: EnvStr(),
+
+      SITE_TITLE: EnvStr(),
+      SITE_INDEX_TITLE: EnvStr(),
+      SITE_DESCRIPTION: EnvStr(),
+
+      // # Please remove them if you don't like to use backend.
+      // `;` separated list of backend addresses
+      BACKEND_ADDR: EnvStr(),
+      BAIDU_VERIFICATION_CODE: EnvStr(),
+    },
+  },
 
   integrations: [
     sitemap(),
@@ -32,6 +58,7 @@ export default defineConfig({
     },
     ssr: {
       external: ["@myriaddreamin/typst-ts-node-compiler"],
+      noExternal: ["@fontsource-variable/inter"],
     },
   },
 });
