@@ -2,6 +2,7 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 import * as config from "astro:env/client";
+
 import STATS from "../content/snapshot/article-stats.json";
 import COMMENTS from "../content/snapshot/article-comments.json";
 import { loadEnv } from "vite";
@@ -10,6 +11,10 @@ const { URL_BASE } = loadEnv(process.env.NODE_ENV ?? "", process.cwd(), "");
 
 type Comment = (typeof COMMENTS)[number];
 
+/**
+ * Whether to enable theming (dark & light mode).
+ */
+export const kEnableTheming = true;
 /**
  * Whether to enable backend, required by click and comment feature.
  */
@@ -56,6 +61,16 @@ export const kSiteIndexTitle: string = config.SITE_INDEX_TITLE || kSiteTitle;
  * The description of the website.
  */
 export const kSiteDescription: string = config.SITE_DESCRIPTION || "My blog.";
+/**
+ * The name of the site owner.
+ */
+export const kSiteOwner: string = config.SITE_OWNER || "Myriad-Dreamin";
+/**
+ * The source code URL of the site.
+ *
+ * Disable this if you don't want to show the source code link.
+ */
+export const kSiteSourceUrl: string | undefined = config.SITE_SOURCE_URL;
 /**
  * The baidu verification code, used for SEO.
  */
